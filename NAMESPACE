@@ -1,0 +1,18 @@
+import(nlme)
+importFrom("graphics", abline, axis, boxplot, text)
+importFrom("stats", AIC, BIC, aggregate, anova, aov,
+           bartlett.test, coef, contr.sum, deviance,
+           df.residual, fitted, lm, median, na.omit,
+           pchisq, pnorm, pt, ptukey, qchisq, qqline,
+           qqnorm, resid, shapiro.test, terms, vcov, drop1)
+importFrom("utils", combn)
+importFrom("stats", "na.exclude", "sigma")
+export("ea1")
+export("ea2")
+export("ec")
+
+
+
+
+
+
