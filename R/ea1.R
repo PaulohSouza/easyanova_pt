@@ -91,16 +91,16 @@ return(rp2)
 	rr=list(jr,jsample)
 	rr=rr[[i]](r,5000)
         s <- shapiro.test(rr)
-        b <- bartlett.test(response ~ treatments, na.action = na.omit,
+        b <- bartlett.test(resposta ~ tratamentos, na.action = na.omit,
                            data = data)
         cvf = cv(m)
         rd=as.data.frame((sort(sqrt(r^2),decreasing=TRUE)))
         rl=as.list(rownames(rd))
         r1=rl[[1]];r2=rl[[2]];r3=rl[[3]]
-        d=data.frame(round(s$"p.value",4),round(b$"p.value",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
-        rownames(d)=c("p.value Shapiro-Wilk test","p.value Bartlett test","coefficient of variation (%)", "first value most discrepant","second value most discrepant","third value most discrepant")
+        d=data.frame(round(s$"p.valor",4),round(b$"p.valor",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
+        rownames(d)=c("p.valor Shapiro-Wilk test","p.valor Bartlett test","Coeficiente de variacao (%)", "first value most discrepant","second value most discrepant","third value most discrepant")
         colnames(d)="values"
-	l=list("residual analysis"=d,"residuals"=r,"standardized residuals"=rp)
+	l=list("Analise residual"=d,"residuals"=r,"Residuos Padronizados"=rp)
         return(l)}
 
 
@@ -112,16 +112,16 @@ return(rp2)
 	rr=list(jr,jsample)
 	rr=rr[[i]](r,5000)
         s <- shapiro.test(rr)
-        b <- bartlett.test(response ~ treatments, na.action = na.omit,
+        b <- bartlett.test(resposta ~ tratamentos, na.action = na.omit,
                            data = data)
         cvf = cv2(m)
         rd=as.data.frame((sort(sqrt(r^2),decreasing=TRUE)))
         rl=as.list(rownames(rd))
         r1=rl[[1]];r2=rl[[2]];r3=rl[[3]]
-        d=data.frame(round(s$"p.value",4),round(b$"p.value",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
-        rownames(d)=c("p.value Shapiro-Wilk test","p.value Bartlett test","coefficient of variation (%)", "first value most discrepant","second value most discrepant","third value most discrepant")
+        d=data.frame(round(s$"p.valor",4),round(b$"p.valor",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
+        rownames(d)=c("p.valor Shapiro-Wilk test","p.valor Bartlett test","Coeficiente de variacao (%)", "first value most discrepant","second value most discrepant","third value most discrepant")
         colnames(d)="values"
-l=list("residual analysis"=d,"residuals"=r,"standardized residuals"=rp)
+l=list("Analise residual"=d,"residuals"=r,"Residuos Padronizados"=rp)
         return(l)}
 
     fa1=function(a){
@@ -367,8 +367,8 @@ l=list("residual analysis"=d,"residuals"=r,"standardized residuals"=rp)
 	r=resid(m)
 	r=scale(r)
 	t=1:length(r)
-	g1=function(r){boxplot(r,col="grey80",ylab="Standardized residuals", main="Box plot for residuals")}
-	g2=function(r){plot(r~t, pch="",ylim=c(-4,4), ylab="Standardized residuals", xlab="Sequence data", 		main="Standardized residuals vs Sequence data", axes=FALSE);axis(2,c(-4,-3.5,-3,-2.5,-2,-1,0,1,2,2.5,3,3.5,4));abline(h=2.5, lty=2);abline(h=-2.5,lty=2);abline(h=3.5, lty=2, col=2);abline(h=-3.5,lty=2, col=2); text(2.5,2.7, "2.5 z-score");text(2.5,-2.7, "-2.5 z-score");text(2.5,3.7, "3.5 z-score");text(2.5,-3.7, "-3.5 z-score");text(t,r,labels=1:length(r))}
+	g1=function(r){boxplot(r,col="grey80",ylab="Residuos Padronizados", main="Box plot for residuals")}
+	g2=function(r){plot(r~t, pch="",ylim=c(-4,4), ylab="Residuos Padronizados", xlab="Sequence data", 		main="Residuos Padronizados vs Sequence data", axes=FALSE);axis(2,c(-4,-3.5,-3,-2.5,-2,-1,0,1,2,2.5,3,3.5,4));abline(h=2.5, lty=2);abline(h=-2.5,lty=2);abline(h=3.5, lty=2, col=2);abline(h=-3.5,lty=2, col=2); text(2.5,2.7, "2.5 z-score");text(2.5,-2.7, "-2.5 z-score");text(2.5,3.7, "3.5 z-score");text(2.5,-3.7, "-3.5 z-score");text(t,r,labels=1:length(r))}
 	a=qqnorm(r,plot.it = FALSE)
 	d=data.frame(a1=a$x,a2=a$y,a3=sqrt((a$y)^2),a4=1:length(r))
 	do=d[order(d[,3], decreasing=TRUE),]
@@ -378,25 +378,25 @@ d3=do[3,c(1,2)]
 n1=as.character(do[1,4])
 n2=as.character(do[2,4])
 n3=as.character(do[3,4])
-	g3=function(r){qqnorm(r, ylab="Standardized residuals", xlab="Theoretical quantiles", main="Standardized residuals vs Theoretical quantiles");qqline(r, col = "grey50");text(d1,n1,adj=-0.5,col=2, cex=0.8);text(d2,n2,adj=-0.5,col=2, cex=0.8);text(d3,n3,adj=-0.5,col=2,cex=0.8)}
+	g3=function(r){qqnorm(r, ylab="Residuos Padronizados", xlab="Quantis teoricos", main="Residuos Padronizados vs Quantis teoricos");qqline(r, col = "grey50");text(d1,n1,adj=-0.5,col=2, cex=0.8);text(d2,n2,adj=-0.5,col=2, cex=0.8);text(d3,n3,adj=-0.5,col=2,cex=0.8)}
 	g=list(g1,g2,g3)
 	g[[plot]](r)
 	}
 
 
     f1 = function(data) {
-        names(data) = c("treatments", "response")
-        data <- data.frame(treatments = factor(data$treatments),
-                           response = data$response)
-        m <- aov(response ~ treatments, data = data, contrasts = list(treatments = contr.sum))
-        m1 <- aov(response ~ -1 + treatments, data = data, contrasts = list(treatments = contr.sum))
+        names(data) = c("tratamentos", "resposta")
+        data <- data.frame(tratamentos = factor(data$tratamentos),
+                           resposta = data$resposta)
+        m <- aov(resposta ~ tratamentos, data = data, contrasts = list(tratamentos = contr.sum))
+        m1 <- aov(resposta ~ -1 + tratamentos, data = data, contrasts = list(tratamentos = contr.sum))
         a <- anova(m)
         a<-fa1(a)
 	data2 <- na.omit(data)
 	res=fr(m,data)
         mean <- round(coef(m1),4)
         standard.error <- round(sderrs(m1),4)
-        treatment <- levels(data$treatments)
+        treatment <- levels(data$tratamentos)
         ma = data.frame(treatment, mean, standard.error)
         rownames(ma) = NULL;dff=df.residual(m)
         test=fm(ma,dff)
@@ -408,55 +408,55 @@ n3=as.character(do[3,4])
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l <- list(a, mf, test, res)
-        names(l) = list("Analysis of variance",
-                        "Means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Means", "Teste de Comparacao multipla", "Analise residual")
       	pres(m)
 	return(l)
     }
 
     f2 <- function(data) {
-        names(data) = c("treatments", "blocks", "response")
-        data <- data.frame(treatments = factor(data$treatments),
-                           blocks = factor(data$blocks), response = data$response)
-        m <- aov(response ~ treatments + blocks, data = data,
-                 contrasts = list(treatments = contr.sum, blocks = contr.sum))
-        m1 <- aov(response ~ -1 + treatments + blocks, data = data,
-                  contrasts = list(treatments = contr.sum, blocks = contr.sum))
+        names(data) = c("tratamentos", "blocos", "resposta")
+        data <- data.frame(tratamentos = factor(data$tratamentos),
+                           blocos = factor(data$blocos), resposta = data$resposta)
+        m <- aov(resposta ~ tratamentos + blocos, data = data,
+                 contrasts = list(tratamentos = contr.sum, blocos = contr.sum))
+        m1 <- aov(resposta ~ -1 + tratamentos + blocos, data = data,
+                  contrasts = list(tratamentos = contr.sum, blocos = contr.sum))
         a <- anova(m)
         data2 <- na.omit(data)
         res=fr(m,data2)
         a2 <- drop1(m,.~.,test="F")
         a3 <- a2
         a3<-fa2(a3,m)
-        adjusted.mean <- round(coef(m1)[c(1:nlevels(data$treatments))],4)
+        media.ajustada <- round(coef(m1)[c(1:nlevels(data$tratamentos))],4)
         Standart.Error <- round(sderrs(m1),4)
-        standard.error <- Standart.Error[1:nlevels(data$treatments)]
-        treatment <- levels(data$treatments)
-        ma = data.frame(treatment, adjusted.mean, standard.error)
+        standard.error <- Standart.Error[1:nlevels(data$tratamentos)]
+        treatment <- levels(data$tratamentos)
+        ma = data.frame(treatment, media.ajustada, standard.error)
         rownames(ma) = NULL;dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
 	nrep=length(data2[,1])/nlevels(data2[,1])
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l <- list(a3,mf, test, res)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Media ajustada", "Teste de Comparacao multipla", "Analise residual")
 	pres(m)
         return(l)}
     f3 <- function(data) {
-        names(data) = c("treatments", "rows", "columns", "response")
-        data <- data.frame(treatments = factor(data$treatments),
+        names(data) = c("tratamentos", "rows", "columns", "resposta")
+        data <- data.frame(tratamentos = factor(data$tratamentos),
                            rows = factor(data$rows), columns = factor(data$columns),
-                           response = data$response)
-        m <- aov(response ~ treatments + rows + columns, data = data,
-                 contrasts = list(treatments = contr.sum, rows = contr.sum,
+                           resposta = data$resposta)
+        m <- aov(resposta ~ tratamentos + rows + columns, data = data,
+                 contrasts = list(tratamentos = contr.sum, rows = contr.sum,
                                   columns = contr.sum))
-        m1 <- aov(response ~ -1 + treatments + rows + columns, data = data,
-                  contrasts = list(treatments = contr.sum, rows = contr.sum,
+        m1 <- aov(resposta ~ -1 + tratamentos + rows + columns, data = data,
+                  contrasts = list(tratamentos = contr.sum, rows = contr.sum,
                                    columns = contr.sum))
         a <- anova(m)
         data2 <- na.omit(data)
@@ -464,125 +464,125 @@ n3=as.character(do[3,4])
         a2 <- drop1(m,.~.,test="F")
         a3 <- a2
         a3<-fa2(a3,m)
-        adjusted.mean <- round(coef(m1)[c(1:nlevels(data$treatments))],4)
+        media.ajustada <- round(coef(m1)[c(1:nlevels(data$tratamentos))],4)
         Standart.Error <- round(sderrs(m1),4)
-        standard.error <- Standart.Error[1:nlevels(data$treatments)]
-        treatment <- levels(data$treatments)
-        ma = data.frame(treatment, adjusted.mean, standard.error)
+        standard.error <- Standart.Error[1:nlevels(data$tratamentos)]
+        treatment <- levels(data$tratamentos)
+        ma = data.frame(treatment, media.ajustada, standard.error)
         rownames(ma) = NULL;dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l <- list(a3,mf, test,res)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Media ajustada", "Teste de Comparacao multipla", "Analise residual")
 	pres(m)
         return(l)
     }
 
     f4 = function(data) {
-        names(data) = c("treatments", "squares", "rows", "columns",
-                        "response")
-        data <- data.frame(treatments = factor(data$treatments),
+        names(data) = c("tratamentos", "squares", "rows", "columns",
+                        "resposta")
+        data <- data.frame(tratamentos = factor(data$tratamentos),
                            squares = factor(data$squares), rows = factor(data$rows),
-                           columns = factor(data$columns), response = data$response)
-        m <- aov(response ~ treatments + squares + rows + columns,
-                 data = data, contrasts = list(treatments = contr.sum,
+                           columns = factor(data$columns), resposta = data$resposta)
+        m <- aov(resposta ~ tratamentos + squares + rows + columns,
+                 data = data, contrasts = list(tratamentos = contr.sum,
                                                squares = contr.sum, rows = contr.sum, columns = contr.sum))
-        m1 <- aov(response ~ -1 + treatments + squares + rows +
-                      columns, data = data, contrasts = list(treatments = contr.sum,
+        m1 <- aov(resposta ~ -1 + tratamentos + squares + rows +
+                      columns, data = data, contrasts = list(tratamentos = contr.sum,
                                                           squares = contr.sum, rows = contr.sum, columns = contr.sum))
         a <- anova(m)
         a<-fa1(a)
         data2 <- na.omit(data)
         res=fr(m,data2)
-        adjusted.mean <- round(coef(m1)[1:nlevels(data$treatments)],4)
-        standard.error <- round(sderrs(m1)[1:nlevels(data$treatments)],4)
-        treatment <- levels(data$treatments)
-        ma = data.frame(treatment, adjusted.mean, standard.error)
+        media.ajustada <- round(coef(m1)[1:nlevels(data$tratamentos)],4)
+        standard.error <- round(sderrs(m1)[1:nlevels(data$tratamentos)],4)
+        treatment <- levels(data$tratamentos)
+        ma = data.frame(treatment, media.ajustada, standard.error)
         rownames(ma) = NULL;dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l <- list(a, mf, test, res)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Media ajustada", "Teste de Comparacao multipla", "Analise residual")
 	pres(m)
         return(l)
     }
 
     # covariate
     f5<-function(data){
-        names(data)=c("treatments", "covariate", "response")
-        data<-data.frame(treatments=factor(data$treatments), covariate=as.numeric(data$covariate), response=data$response)
-        m<-lm(response~ covariate+treatments,data=data, contrasts=list(treatments=contr.sum))
-        m1<-lm(response~-1+treatments+covariate,data=data, contrasts=list(treatments=contr.sum))
+        names(data)=c("tratamentos", "covariate", "resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), covariate=as.numeric(data$covariate), resposta=data$resposta)
+        m<-lm(resposta~ covariate+tratamentos,data=data, contrasts=list(tratamentos=contr.sum))
+        m1<-lm(resposta~-1+tratamentos+covariate,data=data, contrasts=list(tratamentos=contr.sum))
         a<-anova(m)
         a<-fa1(a)
         data2<-na.omit(data)
         res=fr(m,data2)
         b1=coef(m)[[2]]
         b1
-        ra=data$response-(b1*(data$covariate-mean(data$covariate)))
+        ra=data$resposta-(b1*(data$covariate-mean(data$covariate)))
         data=data.frame(data,ra)
-        m2=lm(ra~-1+treatments, data=data)
+        m2=lm(ra~-1+tratamentos, data=data)
         
-        adjusted.mean<-round(coef(m2)[c(1:nlevels(data$treatments))],4)
-        aaa=aggregate(.~treatments,data,FUN=length)
+        media.ajustada<-round(coef(m2)[c(1:nlevels(data$tratamentos))],4)
+        aaa=aggregate(.~tratamentos,data,FUN=length)
         dff=df.residual(m)
         standard.error<-round(sqrt((deviance(m)/dff)/aaa$ra),4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l<-list(a,mf, test, res)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "media Ajustada", "Teste de comparacao multipla", "Analise Residual")
 	pres(m)
         return(l)}
 
     f6<-function(data){
-        names(data)=c("treatments", "covariate", "blocks", "response")
-        data<-data.frame(treatments=factor(data$treatments), covariate=as.numeric(data$covariate), blocks=factor(data$blocks),response=data$response)
-        m<-lm(response~ covariate+treatments+blocks,data=data, contrasts=list(treatments=contr.sum, blocks=contr.sum))
-        m1<-lm(response~-1+treatments+covariate+blocks,data=data, contrasts=list(treatments=contr.sum, blocks=contr.sum))
+        names(data)=c("tratamentos", "covariate", "blocos", "resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), covariate=as.numeric(data$covariate), blocos=factor(data$blocos),resposta=data$resposta)
+        m<-lm(resposta~ covariate+tratamentos+blocos,data=data, contrasts=list(tratamentos=contr.sum, blocos=contr.sum))
+        m1<-lm(resposta~-1+tratamentos+covariate+blocos,data=data, contrasts=list(tratamentos=contr.sum, blocos=contr.sum))
         a<-anova(m)
         a<-fa1(a)
         data2<-na.omit(data)
         res=fr(m,data2)
         b1=coef(m)[[2]]
         b1
-        ra=data$response-(b1*(data$covariate-mean(data$covariate)))
+        ra=data$resposta-(b1*(data$covariate-mean(data$covariate)))
         data=data.frame(data,ra)
-        m2=lm(ra~-1+treatments+blocks, data=data)
+        m2=lm(ra~-1+tratamentos+blocos, data=data)
         
-        adjusted.mean<-round(coef(m2)[c(1:nlevels(data$treatments))],4)
-        aaa=aggregate(.~treatments,data,FUN=length)
+        media.ajustada<-round(coef(m2)[c(1:nlevels(data$tratamentos))],4)
+        aaa=aggregate(.~tratamentos,data,FUN=length)
         dff=df.residual(m)
         standard.error<-round(sqrt((deviance(m)/dff)/aaa$ra),4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
@@ -590,183 +590,183 @@ n3=as.character(do[3,4])
         rownames(mf) = NULL
         l<-list(a,mf, test, res)
 	pres(m)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Media ajustada", "Teste de Comparacao multipla", "Analise residual")
         return(l)}
 
-    # incomplete blocks
+    # incomplete blocos
     f7<-function(data){
-        names(data)=c("treatments", "repetition","blocks","response")
-        data<-data.frame(treatments=factor(data$treatments), repetition=factor(data$repetition),  blocks=factor(data$blocks), response=data$response)
-        m<-lm(terms(response~ repetition/blocks +treatments, keep.order=TRUE),data=data, contrasts=list(treatments=contr.sum, repetition=contr.sum, blocks=contr.sum))
-        m1<-lm(terms(response~-1+treatments+repetition/blocks, keep.order=TRUE ),data=data, contrasts=list(treatments=contr.sum, repetition=contr.sum, blocks=contr.sum))
+        names(data)=c("tratamentos", "repeticao","blocos","resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), repeticao=factor(data$repeticao),  blocos=factor(data$blocos), resposta=data$resposta)
+        m<-lm(terms(resposta~ repeticao/blocos +tratamentos, keep.order=TRUE),data=data, contrasts=list(tratamentos=contr.sum, repeticao=contr.sum, blocos=contr.sum))
+        m1<-lm(terms(resposta~-1+tratamentos+repeticao/blocos, keep.order=TRUE ),data=data, contrasts=list(tratamentos=contr.sum, repeticao=contr.sum, blocos=contr.sum))
         a<-anova(m)
         a=fa1(a)
         data2<-na.omit(data)
         res=fr(m,data2)
-        adjusted.mean<-round(coef(m1)[c(1:nlevels(data$treatments))],4)
-        standard.error<-round(sderrs(m1)[c(1:nlevels(data$treatments))],4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        media.ajustada<-round(coef(m1)[c(1:nlevels(data$tratamentos))],4)
+        standard.error<-round(sderrs(m1)[c(1:nlevels(data$tratamentos))],4)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l<-list(a,mf, test, res)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Media ajustada", "Teste de Comparacao multipla", "Analise residual")
 	pres(m)
         return(l)}
 
     f8<-function(data){
-        names(data)=c("treatments", "blocks", "response")
-        data<-data.frame(treatments=factor(data$treatments), blocks=as.factor(data$blocks), response=data$response)
-        m<-lm(response~ blocks+treatments,data=data, contrasts=list(treatments=contr.sum, blocks=contr.sum))
-        m1<-lm(response~-1+treatments+blocks,data=data, contrasts=list(treatments=contr.sum, blocks=contr.sum))
+        names(data)=c("tratamentos", "blocos", "resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), blocos=as.factor(data$blocos), resposta=data$resposta)
+        m<-lm(resposta~ blocos+tratamentos,data=data, contrasts=list(tratamentos=contr.sum, blocos=contr.sum))
+        m1<-lm(resposta~-1+tratamentos+blocos,data=data, contrasts=list(tratamentos=contr.sum, blocos=contr.sum))
         a<-anova(m)
         data2<-na.omit(data)
         a=fa1(a)
         r=resid(m)
         s=shapiro.test(r)
         cvf=cv(m)
-        adjusted.mean<-round(coef(m1)[c(1:nlevels(data$treatments))],4)
-        standard.error<-round(sderrs(m1)[c(1:nlevels(data$treatments))],4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        media.ajustada<-round(coef(m1)[c(1:nlevels(data$tratamentos))],4)
+        standard.error<-round(sderrs(m1)[c(1:nlevels(data$tratamentos))],4)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l<-list(a,s,cvf,mf, test)
-        names(l) = list("Analysis of variance",  "Normality test","Coefficient of variation (%)",
-                        "Adjusted means", "Multiple comparison test")
+        names(l) = list("Analise de Variancia",  "Teste de Normalidade","Coeficiente de variacao (%)",
+                        "Media ajustada", "Teste de Comparacao multipla")
 		pres(m)
         return(l)}
 
     f9<-function(data){
-        names(data)=c("treatments", "subject", "period", "response")
-        data<-data.frame(treatments=factor(data$treatments), subject=factor(data$subject), period=as.factor(data$period), response=data$response)
-        m<-lm(response~ treatments +subject+period,data=data, contrasts=list(treatments=contr.sum, subject=contr.sum, period=contr.sum))
-        m1<-lm(response~-1+treatments+ subject+period, data=data, contrasts=list(treatments=contr.sum, subject=contr.sum, period=contr.sum))
+        names(data)=c("tratamentos", "subject", "periodo", "resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), subject=factor(data$subject), periodo=as.factor(data$periodo), resposta=data$resposta)
+        m<-lm(resposta~ tratamentos +subject+periodo,data=data, contrasts=list(tratamentos=contr.sum, subject=contr.sum, periodo=contr.sum))
+        m1<-lm(resposta~-1+tratamentos+ subject+periodo, data=data, contrasts=list(tratamentos=contr.sum, subject=contr.sum, periodo=contr.sum))
         a<-anova(m)
         a=fa1(a)
         data2<-na.omit(data)
         res=fr(m,data2)
-        adjusted.mean<-round(coef(m1)[c(1:nlevels(data$treatments))],4)
-        standard.error<-round(sderrs(m1)[c(1:nlevels(data$treatments))],4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        media.ajustada<-round(coef(m1)[c(1:nlevels(data$tratamentos))],4)
+        standard.error<-round(sderrs(m1)[c(1:nlevels(data$tratamentos))],4)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l<-list(a,mf, test, res)
-        names(l) = list("Analysis of variance",
-                        "Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l) = list("Analise de Variancia",
+                        "Media ajustada", "Teste de Comparacao multipla", "Analise residual")
 	pres(m)
         return(l)}
 
     f10<-function(data){
-        names(data)=c("treatments","repetition", "blocks", "response")
-        data<-data.frame(treatments=factor(data$treatments), repetition=factor(data$repetition), blocks=factor(data$blocks), response=data$response)
-        m<-aov(response~repetition/blocks+treatments,data=data, contrasts=list(repetition=contr.sum, blocks=contr.sum, treatments=contr.sum))
+        names(data)=c("tratamentos","repeticao", "blocos", "resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), repeticao=factor(data$repeticao), blocos=factor(data$blocos), resposta=data$resposta)
+        m<-aov(resposta~repeticao/blocos+tratamentos,data=data, contrasts=list(repeticao=contr.sum, blocos=contr.sum, tratamentos=contr.sum))
 	mrr=m
-        m1<-aov(response~-1+treatments+repetition/blocks,data=data, contrasts=list(repetition=contr.sum, blocks=contr.sum, treatments=contr.sum))
+        m1<-aov(resposta~-1+tratamentos+repeticao/blocos,data=data, contrasts=list(repeticao=contr.sum, blocos=contr.sum, tratamentos=contr.sum))
        	a2 <- drop1(m,.~.,test="F")
         a3 <- a2
         a3<-fa2(a3,m)
         data2<-na.omit(data)
         res=fr(m,data2)
-        adjusted.mean<-round(coef(m1)[c(1:nlevels(data$treatments))],4)
-        standard.error<-round(sderrs(m1)[c(1:nlevels(data$treatments))],4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        media.ajustada<-round(coef(m1)[c(1:nlevels(data$tratamentos))],4)
+        standard.error<-round(sderrs(m1)[c(1:nlevels(data$tratamentos))],4)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-	means=adjusted.mean; names(means)=treatment
+	means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(ma)=NULL
         QME=deviance(m)/df.residual(m)
-        m=nlevels(data$repetition)
-        k=nlevels(data$blocks)
+        m=nlevels(data$repeticao)
+        k=nlevels(data$blocos)
         vef=QME*(1+(m/((m-1)*(k+1))))
-        mb=lm(response~repetition+treatments, data=data)
+        mb=lm(resposta~repeticao+tratamentos, data=data)
         QMEB=deviance(mb)/df.residual(mb)
         Ef=100*QMEB/vef
         l<-list(a3,round(vef,4), round(Ef,4), mf,test, res)
-        names(l)= list("Analysis of variance", "Effective variance", "Efficiency of the design (%)","Adjusted means", "Multiple comparison test", "Residual analysis")
+        names(l)= list("Analise de Variancia", "Variancia efetiva", "Eficiencia do design (%)","Media ajustada", "Teste de Comparacao multipla", "Analise residual")
 	pres(mrr)
         return(l)}
 
 f11<-function(data){
-        names(data)=c("treatments","repetition", "blocks", "response")
-        data<-data.frame(treatments=factor(data$treatments), repetition=factor(data$repetition), blocks=factor(data$blocks), response=data$response)
-        block=interaction(data$repetition,data$blocks)
+        names(data)=c("tratamentos","repeticao", "blocos", "resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), repeticao=factor(data$repeticao), blocos=factor(data$blocos), resposta=data$resposta)
+        block=interaction(data$repeticao,data$blocos)
         data=data.frame(data,block)
-        m<-lme(response~ repetition +treatments,random=~1|block, data=data, contrasts=list(repetition=contr.sum, treatments=contr.sum), na.action=na.omit)
+        m<-lme(resposta~ repeticao +tratamentos,random=~1|block, data=data, contrasts=list(repeticao=contr.sum, tratamentos=contr.sum), na.action=na.omit)
 	mrr=m
-        m1<-lme(response~-1+treatments+repetition, random=~1|repetition/blocks,data=data, contrasts=list(repetition=contr.sum, blocks=contr.sum, treatments=contr.sum), na.action=na.omit)
+        m1<-lme(resposta~-1+tratamentos+repeticao, random=~1|repeticao/blocos,data=data, contrasts=list(repeticao=contr.sum, blocos=contr.sum, tratamentos=contr.sum), na.action=na.omit)
         a3<-anova(m, type="marginal")
         a3<-a3[-1,]
         data2<-na.omit(data)
         r=resid(m)
         s=shapiro.test(r)
-        b1=bartlett.test(r~treatments, data=data2)
-        adjusted.mean<-round(fixef(m1)[c(1:nlevels(data$treatments))],4)
-        standard.error<-round(sderrs(m1)[c(1:nlevels(data$treatments))],4)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean,standard.error)
+        b1=bartlett.test(r~tratamentos, data=data2)
+        media.ajustada<-round(fixef(m1)[c(1:nlevels(data$tratamentos))],4)
+        standard.error<-round(sderrs(m1)[c(1:nlevels(data$tratamentos))],4)
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada,standard.error)
         rownames(ma)=NULL
         dff=a3[[2]][[2]]
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME= m$sigma^2
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(ma)=NULL
         QME= m$sigma^2
-        m=nlevels(data$repetition)
-        k=nlevels(data$blocks)
-        mb=lm(response~repetition/blocks+treatments, data=data)
+        m=nlevels(data$repeticao)
+        k=nlevels(data$blocos)
+        mb=lm(resposta~repeticao/blocos+tratamentos, data=data)
         QMB= anova(mb)[[3]][3]
         vef=QME*(1+(m/((m-1)*(k+1)))*(QMB-QME)/QMB)
-        mbb=lm(response~repetition+treatments, data=data)
+        mbb=lm(resposta~repeticao+tratamentos, data=data)
         Ef=100*(deviance(mbb)/df.residual(mbb))/vef
         l<-list(a3,s,b1, round(vef,4), round(Ef,4), mf,test)
-        names(l)= list("Analysis of variance (marginal anova = type III SS)", "Normality test", "Homogeneity of variances", "Effective variance", "Efficiency of the design (%)","Adjusted means", "Multiple comparison test")
+        names(l)= list("Analise de Variancia (marginal anova = type III SS)", "Teste de Normalidade", "Homogeneidade de variancias", "Variancia efetiva", "Eficiencia do design (%)","Media ajustada", "Teste de Comparacao multipla")
 		pres(mrr)
         return(l)}
 
     
     f12<-function(data){
-        names(data)=c("treatments", "period","animal","response")
-        data<-data.frame(treatments=factor(data$treatments), period=factor(data$period),  animal=factor(data$animal), response=data$response, p=as.numeric(data$period))
-        m=aov(response~p*animal-p+period+animal+treatments, contrasts=list(treatments=contr.sum, animal=contr.sum, period=contr.sum), data=data)
+        names(data)=c("tratamentos", "periodo","animal","resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), periodo=factor(data$periodo),  animal=factor(data$animal), resposta=data$resposta, p=as.numeric(data$periodo))
+        m=aov(resposta~p*animal-p+periodo+animal+tratamentos, contrasts=list(tratamentos=contr.sum, animal=contr.sum, periodo=contr.sum), data=data)
         a<-anova(m)
         a<-fa1(a)
         data2<-na.omit(data)
@@ -775,34 +775,34 @@ f11<-function(data){
         names(c)
         class(c)
         c=as.list(c)
-        t=c[1:(nlevels(data$animal)+nlevels(data$period)+nlevels(data$treatments)-2)]
-        t1=t[-c(1:(nlevels(data$animal)+nlevels(data$period)-1))]
+        t=c[1:(nlevels(data$animal)+nlevels(data$periodo)+nlevels(data$tratamentos)-2)]
+        t1=t[-c(1:(nlevels(data$animal)+nlevels(data$periodo)-1))]
         tf=-(sum(unlist(t1)))
         ef=c(unlist(t1),tf)
-        adjusted.mean<- mean(data$response, na.rm = T)+as.numeric(ef)
-        Standart.Error<-sderrs(m) [1:(nlevels(data$animal)+nlevels(data$period)+nlevels(data$treatments)-2)]
-        Standart.Error= Standart.Error[-c(1:(nlevels(data$animal)+nlevels(data$period)-1))]
+        media.ajustada<- mean(data$resposta, na.rm = T)+as.numeric(ef)
+        Standart.Error<-sderrs(m) [1:(nlevels(data$animal)+nlevels(data$periodo)+nlevels(data$tratamentos)-2)]
+        Standart.Error= Standart.Error[-c(1:(nlevels(data$animal)+nlevels(data$periodo)-1))]
         standart.error<-c(as.numeric(Standart.Error), as.numeric(Standart.Error)[1])*sqrt(1.5)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean=round(adjusted.mean,4),standard.error=round(standart.error,4))
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada=round(media.ajustada,4),standard.error=round(standart.error,4))
         rownames(ma)=NULL; dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l<-list(a,mf, test, res)
-        names(l)= list("Analysis of variance", "Adjusted means", "Multiple comparison test","Residual analysis")
+        names(l)= list("Analise de Variancia", "Media ajustada", "Teste de Comparacao multipla","Analise residual")
 	pres(m)
         return(l)}
 
     f13<-function(data){
-        names(data)=c("treatments", "blocks", "period","animal","response")
-        data<-data.frame(treatments=factor(data$treatments), blocks=factor(data$blocks), period=factor(data$period),  animal=factor(data$animal), response=data$response, p=as.numeric(data$period))
-        m=aov(response~blocks+p*animal-p+animal+treatments+blocks/period, contrasts=list(treatments=contr.sum, animal=contr.sum, period=contr.sum, blocks=contr.sum), data=data)
+        names(data)=c("tratamentos", "blocos", "periodo","animal","resposta")
+        data<-data.frame(tratamentos=factor(data$tratamentos), blocos=factor(data$blocos), periodo=factor(data$periodo),  animal=factor(data$animal), resposta=data$resposta, p=as.numeric(data$periodo))
+        m=aov(resposta~blocos+p*animal-p+animal+tratamentos+blocos/periodo, contrasts=list(tratamentos=contr.sum, animal=contr.sum, periodo=contr.sum, blocos=contr.sum), data=data)
         a<-anova(m)
         a<-fa1(a)
         data2<-na.omit(data)
@@ -815,33 +815,33 @@ f11<-function(data){
         t1=t[-c(1:(a[[1]][1]+a[[1]][2]))]
         tf=-(sum(unlist(t1)))
         ef=c(unlist(t1),tf)
-        adjusted.mean<- mean(data$response, na.rm = T)+as.numeric(ef)
+        media.ajustada<- mean(data$resposta, na.rm = T)+as.numeric(ef)
         Standart.Error<-sderrs(m)[1:(a[[1]][1]+ a[[1]][2]+a[[1]][3])+1]
         Standart.Error= Standart.Error[-c(1:(a[[1]][1]+a[[1]][2]))]
         standart.error<-c(as.numeric(Standart.Error), as.numeric(Standart.Error)[1])*sqrt(1.5)
-        treatment<-levels(data$treatments)
-        ma=data.frame(treatment,adjusted.mean=round(adjusted.mean,4),standard.error=round(standart.error,4))
+        treatment<-levels(data$tratamentos)
+        ma=data.frame(treatment,media.ajustada=round(media.ajustada,4),standard.error=round(standart.error,4))
         rownames(ma)=NULL
         dff=df.residual(m)
         test=fm(ma,dff)
         groups=ft(test, alpha); ma=ma[order(ma[,2], decreasing=TRUE),]
-        means=adjusted.mean; names(means)=treatment
+        means=media.ajustada; names(means)=treatment
 	QME=deviance(m)/dff
 	nrep=length(data2[,1])/nlevels(data2[,1])
 	scott_knott=sk(means, dff, QME, nrep, alpha)
         mf=data.frame(ma,groups, scott_knott)
         rownames(mf) = NULL
         l<-list(a,mf, test, res)
-        names(l)= list("Analysis of variance", "Adjusted means", "Multiple comparison test","Residual analysis")
+        names(l)= list("Analise de Variancia", "Media ajustada", "Teste de Comparacao multipla","Analise residual")
 	pres(m)
         return(l)}
 
 f14 <-
 function(data, alpha=0.05){
-names(data)=c("treatments", "response")
+names(data)=c("tratamentos", "resposta")
 data=na.exclude(data)
-data=data.frame(treatments=factor(data$treatments), response=data$response)
-ran=rank(data$response, ties.method = c("average"))
+data=data.frame(tratamentos=factor(data$tratamentos), resposta=data$resposta)
+ran=rank(data$resposta, ties.method = c("average"))
 d=data.frame(data,ran)
 s = split(d[, -1], d[,1])
 fx=function(u){s[[u]][,2]}
@@ -849,7 +849,7 @@ u=1:length(s)
 ss=lapply(u,fx)
 soma=lapply(ss, sum, na.rm=TRUE)
 f1=function(x){length(s[x][[1]][[1]])}
-x=1:nlevels(data$treatments)
+x=1:nlevels(data$tratamentos)
 n=lapply(x, f1); n=lapply(n, as.numeric)
 f2=function(x){soma[[x]]/n[[x]]}
 ra=lapply(x, f2)
@@ -858,7 +858,7 @@ f3=function(x){(soma[[x]]^2)/n[[x]]}
 nn=length(data[,1])
 S=(1/(nn-1))*((sum(d[,3]^2))-((nn*(nn+1)^2)/4)) #var
 ra2=(sum(as.numeric(lapply(x, f3)))-((nn*(nn+1)^2)/4))*(1/S) #T
-gl=nlevels(data$treatments)-1
+gl=nlevels(data$tratamentos)-1
 pq=pchisq(ra2,lower.tail=FALSE, df=gl) #chisq
 fm=function(x){mean(s[x][[1]][[1]], na.rm=TRUE)}
 fmed=function(x){median(s[x][[1]][[1]], na.rm=TRUE)}
@@ -875,11 +875,11 @@ yi=auxj[1,]-auxj[2,]#names
 jjj=ma[,3]
 auxjj <- combn(jjj, 2)
 yii=(1/auxjj[1,])+(1/auxjj[2,])#means for ranks
-ct=S*((nn-1-ra2)/(nn-nlevels(data$treatments)))
+ct=S*((nn-1-ra2)/(nn-nlevels(data$tratamentos)))
 x=1:length(yi)
 f4=function(x){yi[x]/sqrt(ct*yii[x])}
 tcal=lapply(x, f4)
-p=function(x){(1-pt(tcal[[x]],df=nn-nlevels(data$treatments)))*2}
+p=function(x){(1-pt(tcal[[x]],df=nn-nlevels(data$tratamentos)))*2}
 p=lapply(x,p)
 pa1=p.adjust(as.numeric(p), method=c("holm"))
 pa2=p.adjust(as.numeric(p), method=c("bonferroni"))
@@ -894,22 +894,22 @@ med=data.frame(treatment=rownames(med),rank=round(ma$rank,4),mean=round(ma$means
 rownames(med)=NULL
 med
 pri=data.frame(round(c(ra2,pq),4));colnames(pri)="Estimates"
-rownames(pri)=c("Kruskal-Wallis chi-squared = ","p.value = ")
-l=list(pri,med,resp) ; names(l)=c("Kruskal-Wallis Rank Sum Test", "Ranks, Means and Medians", "Multiple comparison test for ranks")
-n=2:(nlevels(data$treatments)+1)
-plot(response~treatments, data=data, col=n)
+rownames(pri)=c("Kruskal-Wallis chi-squared = ","p.valor = ")
+l=list(pri,med,resp) ; names(l)=c("Kruskal-Wallis Rank Sum Test", "Ranks, Means and Medians", "Teste de Comparacao multipla for ranks")
+n=2:(nlevels(data$tratamentos)+1)
+plot(resposta~tratamentos, data=data, col=n)
 return(l)
 }
 
 f15 <-
 function(data, alpha=0.05){
-names(data)=c("treatments", "blocks", "response")
-data=data.frame(treatments=factor(data$treatments),blocks=as.factor(data$blocks), response=data$response)
+names(data)=c("tratamentos", "blocos", "resposta")
+data=data.frame(tratamentos=factor(data$tratamentos),blocos=as.factor(data$blocos), resposta=data$resposta)
 d = split(data, data[,2])
-f1=function(data){rank(data$response, ties.method = c("average"))}
+f1=function(data){rank(data$resposta, ties.method = c("average"))}
 ran=lapply(d, f1)
 da=data.frame(ran)
-rownames(da)=d[[1]]$treatments
+rownames(da)=d[[1]]$tratamentos
 su=rowSums(da, na.rm=TRUE); sua=su^2; suu=sum(sua)
 b=nlevels(data[,2])
 t=nlevels(data[,1])
@@ -923,13 +923,13 @@ ran3=lapply(1:ncol(da), f3); rr=unlist(ran3)
 rr=sum(rr); fc=(1/(t-1))*rr
 cal=cal/((b*t*(t+1))-fc)
 pq=pchisq(cal,lower.tail=FALSE, df=gl) #chisq
-f11=function(data){mean(data$response, na.rm=TRUE)}
+f11=function(data){mean(data$resposta, na.rm=TRUE)}
 ran2=lapply(d, f11)
 so=data.frame(su, na=names(su))
 so=so[order(so[,2], decreasing=FALSE),]
-a1=aggregate(.~treatments, data, FUN=mean)
-a2=aggregate(.~treatments, data, FUN=median)
-da=data.frame(names=levels(a1$treatments), ra=so[,1], means=a1[,3],md=a2[,3])
+a1=aggregate(.~tratamentos, data, FUN=mean)
+a2=aggregate(.~tratamentos, data, FUN=median)
+da=data.frame(names=levels(a1$tratamentos), ra=so[,1], means=a1[,3],md=a2[,3])
 ma=da[order(da[,2], decreasing=TRUE),]
 j=ma[,1];j=as.character(j)
 aux <- combn(j, 2)
@@ -946,17 +946,17 @@ prob3=p.adjust(prob1, method="bonferroni")
 prob4=p.adjust(prob1, method="fdr")
 resp=data.frame(w,round(yi,4),round(prob1,4), round(prob2,4), round(prob3,4), round(prob4,4))
 resp
-colnames(resp)=c("pair", "contrast", "p(non adjusted)" ,"p.adj(Holm)", "p.adj(Bonferroni)", "p.adj(fdr)")
+colnames(resp)=c("pair", "contrast", "p(non Ajustada)" ,"p.adj(Holm)", "p.adj(Bonferroni)", "p.adj(fdr)")
 med=ft(resp, alpha=alpha)
-colnames(med)=c("non adjusted", "adjust.Holm", "adjust.Bonferroni", "adjust.fdr" )
+colnames(med)=c("non Ajustada", "adjust.Holm", "adjust.Bonferroni", "adjust.fdr" )
 med=data.frame(treatment=rownames(med),rank=round(ma$ra,4), mean=round(ma$means,4), median=round(ma$md,4),med)
 rownames(med)=NULL
 med
 pri=data.frame(round(c(cal,pq),4));colnames(pri)="Estimates"
-rownames(pri)=c("Friedman chi-squared = ","p.value = ")
-l=list(pri,med,resp) ; names(l)=c("Friedman Rank Sum Test", "Ranks, Means and Medians", "Multiple comparison test for ranks")
-n=2:(nlevels(data$treatments)+1)
-plot(response~treatments, data=data, col=n)
+rownames(pri)=c("Friedman chi-squared = ","p.valor = ")
+l=list(pri,med,resp) ; names(l)=c("Friedman Rank Sum Test", "Ranks, Means and Medians", "Teste de Comparacao multipla for ranks")
+n=2:(nlevels(data$tratamentos)+1)
+plot(resposta~tratamentos, data=data, col=n)
 return(l)
 }
 
