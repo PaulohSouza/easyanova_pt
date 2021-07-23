@@ -97,7 +97,7 @@ return(rp2)
         rd=as.data.frame((sort(sqrt(r^2),decreasing=TRUE)))
         rl=as.list(rownames(rd))
         r1=rl[[1]];r2=rl[[2]];r3=rl[[3]]
-        d=data.frame(round(s$"p.valor",4),round(b$"p.valor",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
+        d=data.frame(round(s$"p.value",4),round(b$"p.value",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
         rownames(d)=c("p.valor Shapiro-Wilk test","p.valor Bartlett test","Coeficiente de variacao (%)", "first value most discrepant","second value most discrepant","third value most discrepant")
         colnames(d)="values"
 	l=list("Analise residual"=d,"residuals"=r,"Residuos Padronizados"=rp)
@@ -118,7 +118,7 @@ return(rp2)
         rd=as.data.frame((sort(sqrt(r^2),decreasing=TRUE)))
         rl=as.list(rownames(rd))
         r1=rl[[1]];r2=rl[[2]];r3=rl[[3]]
-        d=data.frame(round(s$"p.valor",4),round(b$"p.valor",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
+        d=data.frame(round(s$"p.value",4),round(b$"p.value",4), round(cvf,2),as.numeric(r1),as.numeric(r2),as.numeric(r3)); d=t(d)
         rownames(d)=c("p.valor Shapiro-Wilk test","p.valor Bartlett test","Coeficiente de variacao (%)", "first value most discrepant","second value most discrepant","third value most discrepant")
         colnames(d)="values"
 l=list("Analise residual"=d,"residuals"=r,"Residuos Padronizados"=rp)
@@ -894,7 +894,7 @@ med=data.frame(treatment=rownames(med),rank=round(ma$rank,4),mean=round(ma$means
 rownames(med)=NULL
 med
 pri=data.frame(round(c(ra2,pq),4));colnames(pri)="Estimates"
-rownames(pri)=c("Kruskal-Wallis chi-squared = ","p.valor = ")
+rownames(pri)=c("Kruskal-Wallis chi-squared = ","p.value = ")
 l=list(pri,med,resp) ; names(l)=c("Kruskal-Wallis Rank Sum Test", "Ranks, Means and Medians", "Teste de Comparacao multipla for ranks")
 n=2:(nlevels(data$tratamentos)+1)
 plot(resposta~tratamentos, data=data, col=n)
